@@ -21,5 +21,5 @@ with open('secrets.json') as data_file:
     with open('cursor.txt', 'w') as f:
        f.write("{}".format(next_cursor))
 
-    with open('bonobos_followers.json', 'a') as f:
+    with open('followers.json', 'a') as f:
         f.write("{}".format(followers))
