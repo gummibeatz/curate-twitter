@@ -17,7 +17,7 @@ class TwitterAPI:
     # https://dev.twitter.com/rest/reference/get/followers/list
     # default cursor of -1 gets the first page of twitter users
     def get_followers(self,screen_name, count=200, cursor = -1):
-        url = self.BASE_URL + 'followers/list.json?count={0}&screen_name={1}'.format(count,screen_name)
+        url = self.BASE_URL + 'followers/list.json?count={0}&screen_name={1}&cursor={2}'.format(count, screen_name, cursor)
         http_method = 'GET'
         http_headers = 'Content-Type: application/json'
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
