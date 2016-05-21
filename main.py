@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from twitter_client import TwitterAPI
 import json
 import os.path
@@ -14,10 +16,9 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
 
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
     
+    cursor = -1
     if os.path.isfile('/Volumes/LINUS_USB/Twitter-Scraper/cursor.txt'):
         cursor = open('/Volumes/LINUS_USB/Twitter-Scraper/cursor.txt').read()
-    else:
-        cursor = "-1"
 
     response = twitter.get_followers("bonobos", cursor=cursor)
 
@@ -29,4 +30,4 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
        f.write("{}".format(next_cursor))
 
     with open('/Volumes/LINUS_USB/Twitter-Scraper/followers.json', 'a') as f:
-       f.write("{}\n".format(followers))
+       f.write("{}\n".format(json.dumps(followers)))

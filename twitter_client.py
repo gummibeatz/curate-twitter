@@ -1,3 +1,6 @@
+
+# -*- coding: UTF-8 -*-
+
 import oauth2
 import json 
 
