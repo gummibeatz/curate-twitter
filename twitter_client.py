@@ -22,3 +22,10 @@ class TwitterAPI:
         http_headers = 'Content-Type: application/json'
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
         return json.loads(content)
+
+    def get_user_timeline(self, screen_name, count=200):
+        url = self.BASE_URL + 'statuses/user_timeline.json?count={0}&screen_name={1}'.format(count, screen_name)
+        http_method = 'GET'
+        http_headers = 'Content-Type: application/json'
+        resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        return json.loads(content)
