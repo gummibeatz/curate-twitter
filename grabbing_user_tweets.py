@@ -34,3 +34,8 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
     parser = FollowerParser(line_number, filename)
     follower = parser.get_follower(list_index)
     print(follower.name())
+    print(follower.screen_name())
+    print(follower.location())
+    print(follower.followers_count())
+    print(follower.friends_count())
+    print(follower.statuses_count())
