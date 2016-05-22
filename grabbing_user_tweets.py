@@ -8,6 +8,12 @@ import csv
 import io
 from unicode_csv import *
 
+def assemble_profile_from_tweets(tweets):
+    profile = ""
+    for tweet in tweets:
+        profile += tweet['text']
+    return profile
+
 
 with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:    
     data = json.load(data_file)
@@ -40,13 +46,14 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
 
     with io.open(csv_filename, 'wb') as csv_data:
         writer = UnicodeWriter(csv_data)
-        
-        writer.writerow(['hey', 'you'])
-        writer.writerow(['bye', 'me'])
+
         for i in range(list_index, list_index + 100):
             follower = parser.get_follower(i)
+            
+            tweets =  twitter.get_user_timeline(follower.screen_name())
+            profile = assemble_profile_from_tweets(tweets)
+            print(profile)
 
-            print(follower.name()),
             print(follower.screen_name()),
             print(follower.location()),
             print(follower.followers_count()),
@@ -61,3 +68,5 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
                 follower.friends_count(),
                 follower.statuses_count()
             ])
+
+            break
