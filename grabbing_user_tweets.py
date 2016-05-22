@@ -4,6 +4,9 @@ from twitter_client import TwitterAPI
 from follower_parser import FollowerParser
 import json
 import os.path
+import csv
+import io
+from unicode_csv import *
 
 
 with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:    
@@ -32,10 +35,29 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
     filename = '/Volumes/LINUS_USB/Twitter-Scraper/followers.json'
 
     parser = FollowerParser(line_number, filename)
-    follower = parser.get_follower(list_index)
-    print(follower.name())
-    print(follower.screen_name())
-    print(follower.location())
-    print(follower.followers_count())
-    print(follower.friends_count())
-    print(follower.statuses_count())
+    
+    csv_filename = '/Volumes/LINUS_USB/Twitter-Scraper/results.csv'
+
+    with io.open(csv_filename, 'wb') as csv_data:
+        writer = UnicodeWriter(csv_data)
+        
+        writer.writerow(['hey', 'you'])
+        writer.writerow(['bye', 'me'])
+        for i in range(list_index, list_index + 100):
+            follower = parser.get_follower(i)
+
+            print(follower.name()),
+            print(follower.screen_name()),
+            print(follower.location()),
+            print(follower.followers_count()),
+            print(follower.friends_count()),
+            print(follower.statuses_count())
+
+            writer.writerow([
+                follower.name(),
+                follower.screen_name(),
+                follower.location(),
+                follower.followers_count(),
+                follower.friends_count(),
+                follower.statuses_count()
+            ])

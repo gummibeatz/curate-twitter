@@ -16,10 +16,10 @@ class TwitterFollower:
         return self.follower_dict['location'] or "NONE"
 
     def followers_count(self):
-        return self.follower_dict['followers_count']
+        return str(self.follower_dict['followers_count'])
 
     def friends_count(self):
-        return self.follower_dict['friends_count']
+        return str(self.follower_dict['friends_count'])
 
     def statuses_count(self):
-        return self.follower_dict['statuses_count']
+        return str(self.follower_dict['statuses_count'])
