@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from twitter_client import TwitterAPI
+from pi_client import PersonalityInsightsAPI
 from follower_parser import FollowerParser
 import json
 import os.path
@@ -9,23 +10,32 @@ import io
 from unicode_csv import *
 
 def assemble_profile_from_tweets(tweets):
-    profile = ""
+    formatted_tweets = []
     for tweet in tweets:
         profile += tweet['text']
-    return profile
+        formatted_tweets.append({
+            "content": tweet['text'],
+            "language": "en"
+        })
+    return {"contentItems": formatted_tweets}
 
 
 with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:    
     data = json.load(data_file)
 
-    consumer_key = data['consumer_key']
-    consumer_secret = data['consumer_secret']
+    consumer_key = data['twitter_consumer_key']
+    consumer_secret = data['twitter_consumer_secret']
 
-    token_key = data['token_key']
-    token_secret = data['token_secret']
+    token_key = data['twitter_token_key']
+    token_secret = data['twitter_token_secret']
 
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
-    
+
+    pi_username = data['pi_username']
+    pi_password = data['pi_password']
+
+    pi = PersonalityInsightsAPI(pi_username, pi_password)
+
     line_number = 0
     if os.path.isfile('/Volumes/LINUS_USB/Twitter-Scraper/line_number'):
         line_number = open('/Volumes/LINUS_USB/Twitter-Scraper/line_number').read()
@@ -51,14 +61,15 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
             follower = parser.get_follower(i)
             
             tweets =  twitter.get_user_timeline(follower.screen_name())
+            print tweets
             profile = assemble_profile_from_tweets(tweets)
-            print(profile)
+        
 
-            print(follower.screen_name()),
-            print(follower.location()),
-            print(follower.followers_count()),
-            print(follower.friends_count()),
-            print(follower.statuses_count())
+#            print(follower.screen_name()),
+#            print(follower.location()),
+#            print(follower.followers_count()),
+#            print(follower.friends_count()),
+#            print(follower.statuses_count())
 
             writer.writerow([
                 follower.name(),
@@ -68,5 +79,4 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
                 follower.friends_count(),
                 follower.statuses_count()
             ])
-
             break
