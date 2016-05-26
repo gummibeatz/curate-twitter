@@ -12,10 +12,14 @@ from unicode_csv import *
 def assemble_profile_from_tweets(tweets):
     formatted_tweets = []
     for tweet in tweets:
-        profile += tweet['text']
         formatted_tweets.append({
             "content": tweet['text'],
-            "language": "en"
+            "contenttype": "text/plain",
+            "created": 0,
+            "id":tweet['id_str'],
+            "language": "en",
+            "sourceid": "Twitter API",
+            "userid": "@wouldn'tyouliketoknow"
         })
     return {"contentItems": formatted_tweets}
 
@@ -61,9 +65,9 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
             follower = parser.get_follower(i)
             
             tweets =  twitter.get_user_timeline(follower.screen_name())
-            print tweets
             profile = assemble_profile_from_tweets(tweets)
-        
+            
+            pi.get_profile(profile)
 
 #            print(follower.screen_name()),
 #            print(follower.location()),
