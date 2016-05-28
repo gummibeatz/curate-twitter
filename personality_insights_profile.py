@@ -179,7 +179,7 @@ class PersonalityInsightsProfile:
         return Personality(self.values()['children'][0]['children'][4])
 
     def days(self):
-        return Personality(self.social_behavior()['children'][0]['children'][0]['children'][0])
+        return Personality(self.social_behavior()['children'][0]['children'][0])
 
     def sunday(self):
         return Personality(self.days().children()[0])
@@ -203,7 +203,7 @@ class PersonalityInsightsProfile:
         return Personality(self.days().children()[6])
 
     def hours(self):
-        return Personality(self.social_behavior()['children'][0]['children'][0]['children'][1])
+        return Personality(self.social_behavior()['children'][0]['children'][1])
     
     def midnight(self):
         return Personality(self.hours().children()[0])

@@ -69,7 +69,6 @@ with open('secrets.json') as data_file:
             tweets =  twitter.get_user_timeline(follower.screen_name())
             profile = assemble_profile_from_tweets(tweets)
             pi_profile = PersonalityInsightsProfile(pi.get_profile(profile))
-            print(pi_profile.adventurousness().percentage())
             writer.writerow([
                 follower.name(),
                 follower.screen_name(),

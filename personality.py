@@ -14,7 +14,7 @@ class Personality:
         return self.profile['category']
 
     def percentage(self):
-        return self.profile['percentage']
+        return str(self.profile['percentage'])
 
     def sampling_error(self):
         return self.profile['sampling_error']
