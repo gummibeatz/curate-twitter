@@ -177,3 +177,102 @@ class PersonalityInsightsProfile:
 
     def self_transcendence(self):
         return Personality(self.values()['children'][0]['children'][4])
+
+    def days(self):
+        return Personality(self.social_behavior()['children'][0]['children'][0]['children'][0])
+
+    def sunday(self):
+        return Personality(self.days().children()[0])
+
+    def monday(self):
+        return Personality(self.days().children()[1])
+
+    def tuesday(self):
+        return Personality(self.days().children()[2])
+
+    def wednesday(self):
+        return Personality(self.days().children()[3])
+
+    def thursday(self):
+        return Personality(self.days().children()[4])
+
+    def friday(self):
+        return Personality(self.days().children()[5])
+
+    def saturday(self):
+        return Personality(self.days().children()[6])
+
+    def hours(self):
+        return Personality(self.social_behavior()['children'][0]['children'][0]['children'][1])
+    
+    def midnight(self):
+        return Personality(self.hours().children()[0])
+
+    def one_am(self):
+        return Personality(self.hours().children()[1])
+
+    def two_am(self):
+        return Personality(self.hours().children()[2])
+
+    def three_am(self):
+        return Personality(self.hours().children()[3])
+
+    def four_am(self):
+        return Personality(self.hours().children()[4])
+
+    def five_am(self):
+        return Personality(self.hours().children()[5])
+
+    def six_am(self):
+        return Personality(self.hours().children()[6])
+
+    def seven_am(self):
+        return Personality(self.hours().children()[7])
+
+    def eight_am(self):
+        return Personality(self.hours().children()[8])
+
+    def nine_am(self):
+        return Personality(self.hours().children()[9])
+
+    def ten_am(self):
+        return Personality(self.hours().children()[10])
+
+    def eleven_am(self):
+        return Personality(self.hours().children()[11])
+
+    def noon(self):
+        return Personality(self.hours().children()[12])
+
+    def one_pm(self):
+        return Personality(self.hours().children()[13])
+
+    def two_pm(self):
+        return Personality(self.hours().children()[14])
+
+    def three_pm(self):
+        return Personality(self.hours().children()[15])
+
+    def four_pm(self):
+        return Personality(self.hours().children()[16])
+
+    def five_pm(self):
+        return Personality(self.hours().children()[17])
+
+    def six_pm(self):
+        return Personality(self.hours().children()[18])
+
+    def seven_pm(self):
+        return Personality(self.hours().children()[19])
+
+    def eight_pm(self):
+        return Personality(self.hours().children()[20])
+
+    def nine_pm(self):
+        return Personality(self.hours().children()[21])
+
+    def ten_pm(self):
+        return Personality(self.hours().children()[22])
+
+    def eleven_pm(self):
+        return Personality(self.hours().children()[23])

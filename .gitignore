@@ -1,5 +1,7 @@
 *.swp
+*.swo
 *.json
 *.txt
 *.csv
 *.pyc
+
