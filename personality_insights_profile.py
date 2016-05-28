@@ -94,14 +94,86 @@ class PersonalityInsightsProfile:
     def cooperation(self):
         return Personality(self.agreeableness().children()[1])
 
-    def gregariousness(self):
+    def modesty(self):
         return Personality(self.agreeableness().children()[2])
 
-    def gregariousness(self):
+    def morality(self):
         return Personality(self.agreeableness().children()[3])
 
-    def gregariousness(self):
+    def sympathy(self):
         return Personality(self.agreeableness().children()[4])
 
-    def gregariousness(self):
+    def trust(self):
         return Personality(self.agreeableness().children()[5])
+
+    def neuroticism(self):
+        return Personality(self.personality()['children'][0]['children'][4])
+
+    def anger(self):
+        return Personality(self.agreeableness().children()[0])
+
+    def anxiety(self):
+        return Personality(self.agreeableness().children()[1])
+
+    def depression(self):
+        return Personality(self.agreeableness().children()[2])
+
+    def immoderation(self):
+        return Personality(self.agreeableness().children()[3])
+
+    def self_consciousness(self):
+        return Personality(self.agreeableness().children()[4])
+
+    def vulnerability(self):
+        return Personality(self.agreeableness().children()[5])
+    
+    def challenge(self):
+        return Personality(self.needs()['children'][0]['children'][0])
+
+    def closeness(self):
+        return Personality(self.needs()['children'][0]['children'][1])
+
+    def curiousity(self):
+        return Personality(self.needs()['children'][0]['children'][2])
+
+    def excitement(self):
+        return Personality(self.needs()['children'][0]['children'][3])
+
+    def harmony(self):
+        return Personality(self.needs()['children'][0]['children'][4])
+
+    def ideal(self):
+        return Personality(self.needs()['children'][0]['children'][5])
+
+    def liberty(self):
+        return Personality(self.needs()['children'][0]['children'][6])
+
+    def love(self):
+        return Personality(self.needs()['children'][0]['children'][7])
+
+    def practicality(self):
+        return Personality(self.needs()['children'][0]['children'][8])
+
+    def self_expression(self):
+        return Personality(self.needs()['children'][0]['children'][9])
+
+    def stability(self):
+        return Personality(self.needs()['children'][0]['children'][10])
+
+    def structure(self):
+        return Personality(self.needs()['children'][0]['children'][11])
+
+    def conservation(self):
+        return Personality(self.values()['children'][0]['children'][0])
+
+    def openness_to_change(self):
+        return Personality(self.values()['children'][0]['children'][1])
+
+    def hedonism(self):
+        return Personality(self.values()['children'][0]['children'][2])
+
+    def self_enhancement(self):
+        return Personality(self.values()['children'][0]['children'][3])
+
+    def self_transcendence(self):
+        return Personality(self.values()['children'][0]['children'][4])
