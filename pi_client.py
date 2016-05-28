@@ -10,12 +10,14 @@ class PersonalityInsightsAPI:
         self.username = username
         self.password = password
 
-    def get_profile(self, profile):
+    def get_profile(self, payload):
         url = self.BASE_URL + 'profile'
-        payload={"profile" : profile}
-        resp = requests.post(url, auth=(self.username, self.password), json=payload)
-        print resp.text
-
+        resp = requests.post(url,
+          auth=(self.username, self.password),
+          data=json.dumps(payload),
+          headers={'Content-Type': 'application/json'}
+        )
+        return resp.text
 
 # example of how it has to be formatted. WHAT the fuck tho.... really? all those fields?
 # but also here's an example so yay

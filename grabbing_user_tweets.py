@@ -3,6 +3,7 @@
 from twitter_client import TwitterAPI
 from pi_client import PersonalityInsightsAPI
 from follower_parser import FollowerParser
+from personality_insights_profile import PersonalityInsightsProfile
 import json
 import os.path
 import csv
@@ -11,6 +12,7 @@ from unicode_csv import *
 
 def assemble_profile_from_tweets(tweets):
     formatted_tweets = []
+    ct = 0
     for tweet in tweets:
         formatted_tweets.append({
             "content": tweet['text'],
@@ -24,7 +26,7 @@ def assemble_profile_from_tweets(tweets):
     return {"contentItems": formatted_tweets}
 
 
-with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:    
+with open('secrets.json') as data_file:    
     data = json.load(data_file)
 
     consumer_key = data['twitter_consumer_key']
@@ -41,22 +43,22 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
     pi = PersonalityInsightsAPI(pi_username, pi_password)
 
     line_number = 0
-    if os.path.isfile('/Volumes/LINUS_USB/Twitter-Scraper/line_number'):
-        line_number = open('/Volumes/LINUS_USB/Twitter-Scraper/line_number').read()
+    if os.path.isfile('line_number'):
+        line_number = open('line_number').read()
 
     list_index = 0
-    if os.path.isfile('/Volumes/LINUS_USB/Twitter-Scraper/list_index'):
-        list_index = open('/Volumes/LINUS_USB/Twitter-Scraper/list_index').read()
+    if os.path.isfile('list_index'):
+        list_index = open('list_index').read()
 
     # go through each user
     # save row at which you are at
     # save index of list that you are at
     # stop after 100 requests
-    filename = '/Volumes/LINUS_USB/Twitter-Scraper/followers.json'
+    filename = 'followers.json'
 
     parser = FollowerParser(line_number, filename)
     
-    csv_filename = '/Volumes/LINUS_USB/Twitter-Scraper/results.csv'
+    csv_filename = 'results.csv'
 
     with io.open(csv_filename, 'wb') as csv_data:
         writer = UnicodeWriter(csv_data)
@@ -66,15 +68,8 @@ with open('/Volumes/LINUS_USB/Twitter-Scraper/secrets.json') as data_file:
             
             tweets =  twitter.get_user_timeline(follower.screen_name())
             profile = assemble_profile_from_tweets(tweets)
-            
-            pi.get_profile(profile)
-
-#            print(follower.screen_name()),
-#            print(follower.location()),
-#            print(follower.followers_count()),
-#            print(follower.friends_count()),
-#            print(follower.statuses_count())
-
+            pi_profile = PersonalityInsightsProfile(pi.get_profile(profile))
+            print(pi_profile.adventurousness().percentage())
             writer.writerow([
                 follower.name(),
                 follower.screen_name(),
