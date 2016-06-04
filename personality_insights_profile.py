@@ -7,6 +7,12 @@ class PersonalityInsightsProfile:
     def __init__(self, profile):
         self.profile = json.loads(profile)
 
+    def code(self):
+        if 'code' in self.profile:
+            return self.profile['code']
+        else:
+            return 400
+
     def tree(self):
         return self.profile['tree']
 

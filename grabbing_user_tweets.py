@@ -10,26 +10,30 @@ import csv
 import io
 import sys
 from unicode_csv import *
+from datetime import datetime
 
 twitter_handle = sys.argv[-1]
-line_number_file = "{0}_line_number.txt".format(twitter_handle)
-list_index_file = "{0}_list_index.txt".format(twitter_handle)
-followers_file = "{0}_followers.json".format(twitter_handle)
-csv_file = "{0}_results.csv".format(twitter_handle)
+line_number_file = "{0}/{1}_line_number.txt".format(twitter_handle, twitter_handle)
+list_index_file = "{0}/{1}_list_index.txt".format(twitter_handle, twitter_handle)
+followers_file = "{0}/{1}_followers.json".format(twitter_handle, twitter_handle)
+csv_file = "{0}/{1}_results.csv".format(twitter_handle, twitter_handle)
 
 def assemble_profile_from_tweets(tweets):
     formatted_tweets = []
     ct = 0
     for tweet in tweets:
-        formatted_tweets.append({
-            "content": tweet['text'],
-            "contenttype": "text/plain",
-            "created": 0,
-            "id":tweet['id_str'],
-            "language": "en",
-            "sourceid": "Twitter API",
-            "userid": "@wouldn'tyouliketoknow"
-        })
+        try:
+            formatted_tweets.append({
+                "content": tweet['text'],
+                "contenttype": "text/plain",
+                "created": int(datetime.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y').strftime('%s')) * 1000,
+                "id":tweet['id_str'],
+                "language": "en",
+                "sourceid": "Twitter API",
+                "userid": tweet['user']['id_str']
+            })
+        except Exception:
+            pass
     return {"contentItems": formatted_tweets}
 
 with open('secrets.json') as data_file:    
@@ -67,11 +71,11 @@ with open('secrets.json') as data_file:
         writer = UnicodeWriter(csv_data)
 
         for i in range(list_index, list_index + 100):
+            follower = parser.get_follower(i)
+            
+            tweets =  twitter.get_user_timeline(follower.screen_name())
+            profile = assemble_profile_from_tweets(tweets)
             try:
-                follower = parser.get_follower(i)
-                
-                tweets =  twitter.get_user_timeline(follower.screen_name())
-                profile = assemble_profile_from_tweets(tweets)
                 pi_profile = PersonalityInsightsProfile(pi.get_profile(profile))
                 writer.writerow([
                     follower.name(),
