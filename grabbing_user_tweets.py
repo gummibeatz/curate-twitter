@@ -17,6 +17,7 @@ line_number_file = "{0}/{1}_line_number.txt".format(twitter_handle, twitter_hand
 list_index_file = "{0}/{1}_list_index.txt".format(twitter_handle, twitter_handle)
 followers_file = "{0}/{1}_followers.json".format(twitter_handle, twitter_handle)
 csv_file = "{0}/{1}_results.csv".format(twitter_handle, twitter_handle)
+secrets_file = "secrets/{0}_secrets.json".format(twitter_handle)
 
 def assemble_profile_from_tweets(tweets):
     formatted_tweets = []
@@ -36,7 +37,7 @@ def assemble_profile_from_tweets(tweets):
             pass
     return {"contentItems": formatted_tweets}
 
-with open('secrets.json') as data_file:    
+with open(secrets_file) as data_file:    
     data = json.load(data_file)
 
     consumer_key = data['twitter_consumer_key']

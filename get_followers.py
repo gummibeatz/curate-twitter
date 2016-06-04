@@ -8,8 +8,9 @@ import sys
 twitter_handle = sys.argv[-1]
 cursor_txt_filename = "{0}/{1}_cursor.txt".format(twitter_handle, twitter_handle)
 followers_filename = "{0}/{1}_followers.json".format(twitter_handle, twitter_handle)
+secrets_file = "secrets/{0}_secrets.json".format(twitter_handle)
 
-with open('secrets.json') as data_file:    
+with open(secrets_file) as data_file:    
     data = json.load(data_file)
 
     consumer_key = data['twitter_consumer_key']
