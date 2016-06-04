@@ -3,7 +3,11 @@
 from twitter_client import TwitterAPI
 import json
 import os.path
+import sys
 
+twitter_handle = sys.argv[-1]
+cursor_txt_filename = "{0}_cursor.txt".format(twitter_handle)
+followers_filename = "{0}_followers.json".format(twitter_handle)
 
 with open('secrets.json') as data_file:    
     data = json.load(data_file)
@@ -17,17 +21,16 @@ with open('secrets.json') as data_file:
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
     
     cursor = -1
-    if os.path.isfile('cursor.txt'):
-        cursor = open('cursor.txt').read()
+    if os.path.isfile(cursor_txt_filename):
+        cursor = open(cursor_txt_filename).read()
 
-    response = twitter.get_followers("bonobos", cursor=cursor)
+    response = twitter.get_followers(twitter_handle, cursor=cursor)
 
     followers = response['users']
     next_cursor = response['next_cursor']
 
-
-    with open('cursor.txt', 'w') as f:
+    with open(cursor_txt_filename, 'w') as f:
        f.write("{}".format(next_cursor))
 
-    with open('followers.json', 'a') as f:
+    with open(followers_filename, 'a') as f:
        f.write("{}\n".format(json.dumps(followers)))
