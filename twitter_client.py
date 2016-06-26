@@ -31,3 +31,10 @@ class TwitterAPI:
         http_headers = 'Content-Type: application/json'
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
         return json.loads(content)
+
+    def get_friends(self, screen_name):
+        url = self.BASE_URL + 'friends/ids.json?screen_name={0}'.format(screen_name)
+        http_method = 'GET'
+        http_headers = 'Content-Type: application/json'
+        resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        return json.loads(content)
