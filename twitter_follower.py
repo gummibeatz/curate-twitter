@@ -23,3 +23,6 @@ class TwitterFollower:
 
     def statuses_count(self):
         return str(self.follower_dict['statuses_count'])
+
+    def is_protected(self):
+        return self.follower_dict['protected']
