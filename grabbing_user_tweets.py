@@ -40,11 +40,11 @@ def assemble_profile_from_tweets(tweets):
 with open(secrets_file) as data_file:    
     data = json.load(data_file)
 
-    consumer_key = data['twitter_consumer_key']
-    consumer_secret = data['twitter_consumer_secret']
+    consumer_key = data['grabbing_user_tweets_twitter_consumer_key']
+    consumer_secret = data['grabbing_user_tweets_twitter_consumer_secret']
 
-    token_key = data['twitter_token_key']
-    token_secret = data['twitter_token_secret']
+    token_key = data['grabbing_user_tweets_twitter_token_key']
+    token_secret = data['grabbing_user_tweets_twitter_token_secret']
 
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
 

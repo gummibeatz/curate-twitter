@@ -13,11 +13,11 @@ secrets_file = "secrets/{0}_secrets.json".format(twitter_handle)
 with open(secrets_file) as data_file:    
     data = json.load(data_file)
 
-    consumer_key = data['twitter_consumer_key']
-    consumer_secret = data['twitter_consumer_secret']
+    consumer_key = data['get_followers_twitter_consumer_key']
+    consumer_secret = data['get_followers_twitter_consumer_secret']
 
-    token_key = data['twitter_token_key']
-    token_secret = data['twitter_token_secret']
+    token_key = data['get_followers_twitter_token_key']
+    token_secret = data['get_followers_twitter_token_secret']
 
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
     

@@ -16,11 +16,11 @@ who_followers_follow_file = "{0}/{1}_who_followers_follow.txt".format(twitter_ha
 with open(secrets_file) as data_file:    
     data = json.load(data_file)
 
-    consumer_key = data['twitter_following_consumer_key']
-    consumer_secret = data['twitter_following_consumer_secret']
+    consumer_key = data['who_are_the_followers_following_twitter_consumer_key']
+    consumer_secret = data['who_are_the_followers_following_twitter_consumer_secret']
 
-    token_key = data['twitter_following_token_key']
-    token_secret = data['twitter_following_token_secret']
+    token_key = data['who_are_the_followers_following_twitter_token_key']
+    token_secret = data['who_are_the_followers_following_twitter_token_secret']
     
     print("consumer_key = {0}\nconsumer_secret={1}\ntoken_key={2}\ntoken_secret={3}".format(consumer_key, consumer_secret, token_key, token_secret))
 
