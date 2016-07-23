@@ -19,3 +19,4 @@ list_index
 secrets
 *.log
 .DS_Store
+venv
