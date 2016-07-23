@@ -54,6 +54,6 @@ next_cursor = response['next_cursor']
 
 set_value_to_file(cursor_txt_file, next_cursor)
 
-with open(followers_filename, 'a') as f:
+with open(followers_file, 'a') as f:
     for follower in followers:
         f.write("{}\n".format(json.dumps(follower)))
