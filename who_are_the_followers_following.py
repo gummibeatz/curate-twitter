@@ -52,13 +52,11 @@ with open(secrets_file) as data_file:
         follower = parser.get_follower(i)
         if not follower.is_protected():
             following_dict = twitter.get_friends(follower.screen_name())
-            following_dict[u"follower"] = follower.screen_name()
-            
-            print following_dict
+            following_ids = following_dict[u"ids"]
 
             with open(who_followers_follow_file, 'a') as f:
-                f.write("{}\n".format(json.dumps(following_dict)))
+                f.write("{}\n".format(json.dumps(following_ids)))
 
     with open(list_index_file, 'w') as f:
-        updated_list_index = list_index + 15
+        updated_list_index = (list_index + 15)%200
         f.write("{}".format(updated_list_index))
