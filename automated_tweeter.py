@@ -39,7 +39,7 @@ with open(secrets_filename) as data_file:
             if line_number == csv_index+tweet_count:
                 break
 
-    with open(csv_index_file, 'w') as f:
+    with open(csv_index_file, 'w+') as f:
         f.write("{}".format(csv_index+tweet_count)) 
 	   
 
