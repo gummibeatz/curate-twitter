@@ -40,7 +40,10 @@ class TwitterAPI:
         return json.loads(content)
 
     def post_status(self,tweet):
-       url = self.BASE_URL + 'statuses/update.json?status={0}'.format(tweet)
-       http_method = 'POST'
-       http_headers = 'Content-Type: application/json'
-       resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        url = self.BASE_URL + 'statuses/update.json?status={0}'.format(tweet)
+        http_method = 'POST'
+        http_headers = 'Content-Type: application/json'
+        resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        print resp
+        print content
+        
