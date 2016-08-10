@@ -44,4 +44,3 @@ class TwitterAPI:
        http_method = 'POST'
        http_headers = 'Content-Type: application/json'
        resp, content = self.client.request(url, method=http_method, headers=http_headers)
-       return json.loads(content)

@@ -16,8 +16,8 @@ tweet_count=2
 with open(secrets_filename) as data_file:    
     data = json.load(data_file)
 
-    consumer_key = data['consumer_key']
-    consumer_secret = data['consumer_secret']
+    consumer_key = data['twitter_consumer_key']
+    consumer_secret = data['twitter_consumer_secret']
 
     token_key = data['twitter_token_key']
     token_secret = data['twitter_token_secret']
@@ -32,7 +32,9 @@ with open(secrets_filename) as data_file:
 	reader = UnicodeReader(csv_data)
 	for line_number, row in enumerate(reader):
             if line_number >= csv_index and line_number < csv_index + tweet_count:
-                twitter.post_status(row[0] + row[1])
+                status = row[0] + row[1]
+                print "posting status: {0}".format(status)
+                twitter.post_status(status)
 
             if line_number == csv_index+tweet_count:
                 break
