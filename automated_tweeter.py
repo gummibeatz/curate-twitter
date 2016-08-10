@@ -8,9 +8,10 @@ import io
 from unicode_csv import *
 
 
-csv_filename = "FILL_OUT_LATER.csv"
+csv_filename = "test.csv"
 csv_index_filename = "csv_index.txt"
 secrets_filename = "secrets/automated_tweeter_secrets.json"
+tweet_count=25
 
 with open(secrets_filename) as data_file:    
     data = json.load(data_file)
@@ -30,13 +31,13 @@ with open(secrets_filename) as data_file:
     with io.open(csv_filename, 'rb') as csv_data:
 	reader = UnicodeReader(csv_data):
 	for line_number, row in enumerate(reader):
-            if line_number >= csv_index and line_number < csv_index + 25:
-                twitter.post_status(tweet)
+            if line_number >= csv_index and line_number < csv_index + tweet_count:
+                twitter.post_status(row[0] + row[1])
 
-            if line_number == csv_index+25:
+            if line_number == csv_index+tweet_count:
                 break
 
    with open(csv_index_file, 'w') as f:
-        f.write("{}".format(csv_index+25)) 
+        f.write("{}".format(csv_index+tweet_count)) 
 	   
 
