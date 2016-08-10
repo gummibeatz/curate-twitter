@@ -9,9 +9,9 @@ import io
 from unicode_csv import *
 
 def get_first_name(full_name):
-    if full_name:
-        return full_name.split()[0].split('.')[0]
-    else:
+    try:
+        return full_name.split()[0].split('.')[0].split('_')[0]
+    except:
         return "N/A"
 
 twitter_handle = sys.argv[-1]
