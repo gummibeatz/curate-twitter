@@ -11,7 +11,7 @@ from unicode_csv import *
 csv_file = "test.csv"
 csv_index_file = "csv_index.txt"
 secrets_file = "secrets/automated_tweeter_secrets.json"
-tweet_count=2
+tweet_count=25
 
 with open(secrets_file) as data_file:    
     data = json.load(data_file)
@@ -36,7 +36,7 @@ with open(secrets_file) as data_file:
                 print "posting status: {0}".format(status)
                 twitter.post_status(status)
 
-            if line_number == csv_index+tweet_count:
+            if line_number == int(csv_index) + tweet_count:
                 break
 
     with open(csv_index_file, 'w+') as f:

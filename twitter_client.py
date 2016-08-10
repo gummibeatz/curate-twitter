@@ -2,6 +2,7 @@
 
 import oauth2
 import json 
+from urllib import urlencode
 
 class TwitterAPI:
     BASE_URL = 'https://api.twitter.com/1.1/'
@@ -40,10 +41,12 @@ class TwitterAPI:
         return json.loads(content)
 
     def post_status(self,tweet):
-        url = self.BASE_URL + 'statuses/update.json?status={0}'.format(tweet)
+        url = self.BASE_URL + 'statuses/update.json'
         http_method = 'POST'
-        http_headers = 'Content-Type: application/json'
-        resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        print tweet
+	params={'status': tweet}
+        print params
+        resp, content = self.client.request(url, method=http_method, body=urlencode(params))
         print resp
         print content
         
