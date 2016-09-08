@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 
 import oauth2
-import json 
+import json
+import urllib
 
 class TwitterAPI:
     BASE_URL = 'https://api.twitter.com/1.1/'
@@ -40,8 +41,12 @@ class TwitterAPI:
         return json.loads(content)
 
     def search(self, query):
-        url = self.BASE_URL + 'search?q={0}'.format(query)
+        encoded_query = urllib.quote_plus(query)
+        url = self.BASE_URL + 'search/tweets.json?q={0}'.format(encoded_query)
+        print url
         http_method = 'GET'
         http_headers = 'Content-Type: application/json'
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        print resp
+        print content
         return json.loads(content)
