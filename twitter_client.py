@@ -40,13 +40,10 @@ class TwitterAPI:
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
         return json.loads(content)
 
-    def search(self, query):
+    def search(self, query, count=100, result_type="recent"):
         encoded_query = urllib.quote_plus(query)
-        url = self.BASE_URL + 'search/tweets.json?q={0}'.format(encoded_query)
-        print url
+        url = self.BASE_URL + 'search/tweets.json?count={0}&result_type={1}&q={2}'.format(count, result_type, encoded_query)
         http_method = 'GET'
         http_headers = 'Content-Type: application/json'
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
-        print resp
-        print content
         return json.loads(content)

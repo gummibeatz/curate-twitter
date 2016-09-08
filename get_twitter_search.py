@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 
+# gets twitter query based on command line preference
 from twitter_client import TwitterAPI
 import json
 import os.path
@@ -18,14 +19,9 @@ with open(secrets_file) as secrets:
     token_key = data['twitter_token_key']
     token_secret = data['twitter_token_secret']
 
-    print consumer_key
-    print consumer_secret
-    print token_key
-    print token_secret
-
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
 
     with open(tweets_filename, 'a+') as f:
-        print "yay"
-
-    print twitter.search(query)
+        tweets = twitter.search(query)['statuses']
+        for tweet in tweets:
+            f.write("{}\n".format(json.dumps(tweets)))
