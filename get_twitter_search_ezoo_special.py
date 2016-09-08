@@ -22,7 +22,15 @@ with open(secrets_file) as secrets:
 
     twitter = TwitterAPI(consumer_key, consumer_secret, token_key, token_secret)
 
+max_id = int(open(max_id_filename).read())
+
 with open(tweets_filename, 'a+') as f:
-    tweets = twitter.search(query)['statuses']
+    search = twitter.search(query, max_id=max_id)
+    tweets = search['statuses']
     for tweet in tweets:
         f.write("{}\n".format(json.dumps(tweets)))
+
+with open(max_id_filename, 'w+') as f:
+    last_tweet = tweets[-1]
+    max_id = last_tweet['id_str']
+    f.write(max_id)
