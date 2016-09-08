@@ -38,3 +38,10 @@ class TwitterAPI:
         http_headers = 'Content-Type: application/json'
         resp, content = self.client.request(url, method=http_method, headers=http_headers)
         return json.loads(content)
+
+    def search(self, query):
+        url = self.BASE_URL + 'search?q={0}'.format(query)
+        http_method = 'GET'
+        http_headers = 'Content-Type: application/json'
+        resp, content = self.client.request(url, method=http_method, headers=http_headers)
+        return json.loads(content)
