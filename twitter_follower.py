@@ -26,3 +26,15 @@ class TwitterFollower:
 
     def is_protected(self):
         return self.follower_dict['protected']
+
+    def description(self):
+        return self.follower_dict['description'] or "NONE"
+
+    def lang(self):
+        return self.follower_dict['lang'] or "NONE"
+
+    def created_at(self):
+        return self.follower_dict['created_at'] or "NONE"
+
+    def time_zone(self):
+        return self.follower_dict['time_zone'] or "NONE"
