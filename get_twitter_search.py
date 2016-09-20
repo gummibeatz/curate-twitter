@@ -24,4 +24,4 @@ with open(secrets_file) as secrets:
     with open(tweets_filename, 'a+') as f:
         tweets = twitter.search(query)['statuses']
         for tweet in tweets:
-            f.write("{}\n".format(json.dumps(tweets)))
+            f.write("{}\n".format(json.dumps(tweet)))
