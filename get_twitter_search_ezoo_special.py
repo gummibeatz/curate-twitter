@@ -28,7 +28,7 @@ with open(tweets_filename, 'a+') as f:
     search = twitter.search(query, max_id=max_id)
     tweets = search['statuses']
     for tweet in tweets:
-        f.write("{}\n".format(json.dumps(tweets)))
+        f.write("{}\n".format(json.dumps(tweet)))
 
 with open(max_id_filename, 'w+') as f:
     last_tweet = tweets[-1]
